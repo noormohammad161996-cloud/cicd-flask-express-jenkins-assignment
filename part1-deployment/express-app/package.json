@@ -1,0 +1,14 @@
+{
+  "name": "express-app",
+  "version": "1.0.0",
+  "description": "Express Frontend for CI/CD Deployment Assignment",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "Noor Mohammad",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
