@@ -1,0 +1,53 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Checkout Source Code') {
+            steps {
+                echo 'Checking out source code...'
+                checkout scm
+            }
+        }
+
+        stage('Verify Python') {
+            steps {
+                sh 'python3 --version'
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                dir('part1-deployment/flask-app') {
+                    sh '''
+                        python3 -m venv venv
+                        . venv/bin/activate
+                        pip install --upgrade pip
+                        pip install -r requirements.txt
+                    '''
+                }
+            }
+        }
+
+        stage('Verify Flask App') {
+            steps {
+                dir('part1-deployment/flask-app') {
+                    sh '''
+                        . venv/bin/activate
+                        python -m py_compile app.py
+                    '''
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Flask Pipeline Completed Successfully!'
+        }
+
+        failure {
+            echo 'Flask Pipeline Failed!'
+        }
+    }
+}
