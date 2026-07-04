@@ -1,0 +1,46 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Checkout Source Code') {
+            steps {
+                echo 'Checking out source code...'
+                checkout scm
+            }
+        }
+
+        stage('Verify Node.js') {
+            steps {
+                sh 'node --version'
+                sh 'npm --version'
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                dir('part1-deployment/express-app') {
+                    sh 'npm install'
+                }
+            }
+        }
+
+        stage('Verify Express App') {
+            steps {
+                dir('part1-deployment/express-app') {
+                    sh 'node --check app.js'
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Express Pipeline Completed Successfully!'
+        }
+
+        failure {
+            echo 'Express Pipeline Failed!'
+        }
+    }
+}
