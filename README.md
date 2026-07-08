@@ -100,5 +100,3 @@ LinkedIn:
 
 https://www.linkedin.com/in/noor-mohammad-828669275
 
-
-echo "# Webhook Test $(08/07/2026)" >> README.md
