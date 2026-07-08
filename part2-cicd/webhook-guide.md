@@ -48,7 +48,7 @@ Enter the Jenkins webhook endpoint.
 Payload URL
 
 ```
-http://3.109.210.45:8080/github-webhook/
+http://3.110.27.227:8080/github-webhook/
 ```
 
 > Replace the EC2 Public IP if your server IP changes.
